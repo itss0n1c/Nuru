@@ -1,15 +1,16 @@
 {
 	"compilerOptions": {
-		"declaration": false,
-		"forceConsistentCasingInFileNames": true,
-		"lib": ["ES2020"],
-		"module": "CommonJS",
-		"moduleResolution": "Node",
-		"outDir": "dist/",
-		"resolveJsonModule": true,
-		"rootDir": "./",
-		"target": "ES2020",
-		"downlevelIteration": true,
-		"esModuleInterop": true
-	}
+			"declaration": true,
+			"forceConsistentCasingInFileNames": true,
+			"lib": ["ES2020"],
+			"module": "CommonJS",
+			"moduleResolution": "Node",
+			"outDir": "build/",
+			"resolveJsonModule": true,
+			"rootDir": "src/",
+			"target": "ESNext",
+			"downlevelIteration": true,
+			"esModuleInterop": true
+	},
+	"include": ["src/*"]
 }

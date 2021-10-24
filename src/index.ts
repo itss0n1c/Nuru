@@ -22,8 +22,26 @@ export class Nuru {
 	}
 
 	log(text: string, showTitle = false, title = false): void {
-		const str = `${showTitle ? this.accent(`[${this.name}${title ? ` ${text}` : ''}] `) : ''}${!title ? chalk.white(text) : `v${this.version}\n`}`;
+		const str = `${showTitle ? this.accent(`[${this.name}${title ? ` ${text}` : ''}] `) : ''}${!title ? chalk.white(this.formatInline(text)) : `v${this.version}\n`}`;
 		console.log(str);
+	}
+
+	formatInline(str: string): string {
+		const sub = this.substr(str, '`', '`');
+		str = str.replace(/`/g, '');
+		return str.replace(sub, chalk.yellow(sub));
+	}
+
+	error(text: string): void {
+		const str = `${chalk.bgRgb(255, 0, 0)(chalk.rgb(255, 255, 255)('Error'))} ${chalk.white(this.formatInline(text))}`;
+		console.log(str);
+	}
+
+	substr(str: string, start: string, end: string): string {
+		return str.substring(
+			str.indexOf(start) + 1,
+			str.lastIndexOf(end)
+		);
 	}
 
 	async handleRes(): Promise<void> {
@@ -38,12 +56,12 @@ export class Nuru {
 			try {
 				res = await cmd.handle(this, args);
 			} catch (e) {
-				return console.error(e);
+				return this.error(e);
 			}
 
 			return this.log(res);
 		}
-		return this.log(`Command '${cmdname}' not found!`, true);
+		return this.error(`Command \`${cmdname}\` not found!`);
 	}
 
 	async init(opts: Partial<NuruOptions>): Promise<void> {

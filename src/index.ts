@@ -9,6 +9,7 @@ export interface NuruOptions {
 	verison: string
 	accent: [number, number, number],
 	commands: Command[]
+	args?: arg.Spec
 }
 
 export class Nuru {
@@ -86,11 +87,19 @@ export class Nuru {
 			this.commands.set(cmd.name, cmd);
 		}
 
+		if (typeof opts.args === 'undefined') {
+			opts.args = {};
+		}
+
+		opts.args = {
+			...opts.args,
+			'--help': Boolean,
+			'-h': '--help',
+			'-a': '--help'
+		};
+
 		try {
-			this.args = arg({
-				'--help': Boolean,
-				'-h': '--help'
-			});
+			this.args = arg(opts.args);
 		} catch (e) {
 			if (e.code === 'ARG_UNKNOWN_OPTION') {
 				return this.log(e.message, true);

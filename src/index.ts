@@ -103,7 +103,7 @@ export class Nuru {
 			}
 			return this.log(e);
 		}
-		await this.handleRes();
+		return this.handleRes();
 	}
 }
 export { Command, BaseStore, chalk };

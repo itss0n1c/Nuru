@@ -1,3 +1,4 @@
 import { Nuru } from '../src';
 
-new Nuru();
+const cli = new Nuru();
+cli.init();

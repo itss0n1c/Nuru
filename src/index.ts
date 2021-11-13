@@ -18,9 +18,6 @@ export class Nuru {
 	accent: chalk.Chalk
 	args: Result<any>
 	commands = new Commands();
-	constructor(opts?: Partial<NuruOptions>) {
-		this.init(opts);
-	}
 
 	log(text: string, showTitle = false, title = false): void {
 		const str = `${showTitle ? this.accent(`[${this.name}${title ? ` ${text}` : ''}] `) : ''}${!title ? chalk.white(this.formatInline(text)) : `v${this.version}\n`}`;
@@ -65,7 +62,7 @@ export class Nuru {
 		return this.error(`Command \`${cmdname}\` not found!`);
 	}
 
-	async init(opts: Partial<NuruOptions>): Promise<void> {
+	async init(opts?: Partial<NuruOptions>): Promise<void> {
 		if (typeof opts === 'undefined') {
 			opts = {};
 		}

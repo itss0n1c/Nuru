@@ -19,7 +19,7 @@ export class Nuru {
 	args: Result<any>
 	commands = new Commands();
 
-	log(text: string, showTitle = false, title = false): void {
+	async log(text: string, showTitle = false, title = false): Promise<void> {
 		const str = `${showTitle ? this.accent(`[${this.name}${title ? ` ${text}` : ''}] `) : ''}${!title ? chalk.white(this.formatInline(text)) : `v${this.version}\n`}`;
 		console.log(str);
 	}

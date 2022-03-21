@@ -101,8 +101,8 @@ export class Nuru {
 			}
 			return this.log(e);
 		}
-		if (typeof this.args._[0] === 'undefined') {
-			this.args._[0] = opts.defaultCommand ?? 'help';
+		if (typeof opts.defaultCommand !== 'undefined') {
+			this.args._ = [ opts.defaultCommand, ...this.args._ ];
 		}
 		return this.handleRes();
 	}

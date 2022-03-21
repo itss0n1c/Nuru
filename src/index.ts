@@ -31,7 +31,10 @@ export class Nuru {
 		return str.replace(sub, chalk.yellow(sub));
 	}
 
-	error(text: string): void {
+	error(text: string | Error): void {
+		if (typeof text !== 'string') {
+			text = text.message;
+		}
 		const str = `${chalk.bgRgb(255, 0, 0)(chalk.rgb(255, 255, 255)('Error'))} ${chalk.white(this.formatInline(text))}`;
 		console.log(str);
 	}

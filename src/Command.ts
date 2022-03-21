@@ -20,8 +20,9 @@ export class Command<T = Nuru> {
 		this.description = data.description;
 	}
 
-	async run(cb: CBFunction<T>): Promise<void> {
+	run(cb: CBFunction<T>): this {
 		this.response = cb;
+		return this;
 	}
 
 	async handle(client: T, args: string[]): Promise<string> {
@@ -29,4 +30,4 @@ export class Command<T = Nuru> {
 	}
 }
 
-export class Commands extends BaseStore<string, Command> {}
+export class Commands<T = Nuru> extends BaseStore<string, Command<T>> {}

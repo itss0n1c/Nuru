@@ -8,7 +8,7 @@ export interface NuruOptions {
 	name: string
 	verison: string
 	accent: [number, number, number],
-	commands: Command[]
+	commands: Command<any>[]
 	args?: arg.Spec
 	defaultCommand?: string
 }
@@ -44,7 +44,10 @@ export class Nuru {
 	}
 
 	async handleRes(): Promise<void> {
-		const cmdname = this.args._[0];
+		let cmdname = this.args._[0];
+		if (typeof cmdname === 'undefined') {
+			cmdname = 'help';
+		}
 		const args = this.args._.slice(1, this.args._.length);
 		if (this.commands.has(cmdname)) {
 			const cmd = this.commands.get(cmdname);

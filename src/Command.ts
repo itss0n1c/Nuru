@@ -2,7 +2,7 @@ import { Nuru } from '.';
 import BaseStore from './BaseStore';
 
 // eslint-disable-next-line no-unused-vars
-type CBFunction<T = Nuru> = (client: T, args: string[]) => string | Promise<string>
+type CBFunction<T = Nuru> = (client: T, args: string[]) => string | Promise<string> | void | Promise<void>;
 
 interface CmdInfo {
 	name: string
@@ -25,7 +25,7 @@ export class Command<T = Nuru> {
 		return this;
 	}
 
-	async handle(client: T, args: string[]): Promise<string> {
+	async handle(client: T, args: string[]): Promise<string | void> {
 		return this.response(client, args);
 	}
 }

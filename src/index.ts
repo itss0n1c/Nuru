@@ -54,14 +54,17 @@ export class Nuru {
 		const args = this.args._.slice(1, this.args._.length);
 		if (this.commands.has(cmdname)) {
 			const cmd = this.commands.get(cmdname);
-			let res: string;
+			let res: string | void;
 			try {
 				res = await cmd.handle(this, args);
 			} catch (e) {
 				return this.error(e);
 			}
 
-			return this.log(res);
+			if (typeof res !== 'undefined') {
+				return this.log(res);
+			}
+			return void (0);
 		}
 		return this.error(`Command \`${cmdname}\` not found!`);
 	}

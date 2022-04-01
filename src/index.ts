@@ -51,7 +51,10 @@ export class Nuru {
 		if (typeof cmdname === 'undefined') {
 			cmdname = 'help';
 		}
-		const args = this.args._.slice(1, this.args._.length);
+		const extraArgs = this.args._.slice(1, this.args._.length);
+		const definedArgs = Object.keys(this.args).filter(k => k !== '_').map(k => `${k} ${this.args[k]}`);
+
+		const args = [ ...definedArgs, ...extraArgs ];
 		if (this.commands.has(cmdname)) {
 			const cmd = this.commands.get(cmdname);
 			let res: string | void;

@@ -6,7 +6,7 @@ import help from './cmds/help';
 
 export interface NuruOptions {
 	name: string
-	verison: string
+	version: string
 	accent: [number, number, number],
 	commands: Command<any>[]
 	args?: arg.Spec
@@ -77,7 +77,7 @@ export class Nuru {
 			opts = {};
 		}
 		this.name = opts.name ?? 'Nuru';
-		this.version = opts.verison ?? '1.0.0';
+		this.version = opts.version ?? '1.0.0';
 		if (typeof opts.accent !== 'undefined') {
 			this.accent = chalk.rgb(opts.accent[0], opts.accent[1], opts.accent[2]);
 		} else {

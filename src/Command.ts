@@ -1,19 +1,18 @@
 import { Nuru } from '.';
-import BaseStore from './BaseStore';
 
 // eslint-disable-next-line no-unused-vars
 type CBFunction<T = Nuru> = (client: T, args: string[]) => string | Promise<string> | void | Promise<void>;
 
 interface CmdInfo {
-	name: string
-	description: string
+	name: string;
+	description: string;
 }
 
 export class Command<T = Nuru> {
-	name: string
-	description: string
-	client: T
-	response: CBFunction<T>
+	name: string;
+	description: string;
+	client: T;
+	response: CBFunction<T>;
 
 	constructor(data: CmdInfo) {
 		this.name = data.name;
@@ -30,4 +29,4 @@ export class Command<T = Nuru> {
 	}
 }
 
-export class Commands<T = Nuru> extends BaseStore<string, Command<T>> {}
+export class Commands<T = Nuru> extends Map<string, Command<T>> {}

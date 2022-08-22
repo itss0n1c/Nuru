@@ -4,7 +4,8 @@ const testDefaultCommand = new Command({
 	name: 'test',
 	description: 'a default test command'
 }).run((inst, args) => args.join(' '));
-const cli = new Nuru().init({
+
+new Nuru().init({
 	commands: [ testDefaultCommand ],
 	defaultCommand: 'test',
 	args: {
@@ -12,4 +13,3 @@ const cli = new Nuru().init({
 		'-d': String
 	}
 });
-

@@ -1,27 +1,28 @@
-import { Command, Commands } from './Command';
-import BaseStore from './BaseStore';
-import chalk from 'chalk';
 import arg, { Result } from 'arg';
+import chalk from 'chalk';
 import help from './cmds/help';
+import { Command, Commands } from './Command';
 
 export interface NuruOptions {
-	name: string
-	version: string
-	accent: [number, number, number],
-	commands: Command<any>[]
-	args?: arg.Spec
-	defaultCommand?: string
+	name: string;
+	version: string;
+	accent: [number, number, number];
+	commands: Command<any>[];
+	args?: arg.Spec;
+	defaultCommand?: string;
 }
 
 export class Nuru {
-	name: string
-	version: string
-	accent: chalk.Chalk
-	args: Result<any>
+	name: string;
+	version: string;
+	accent: chalk.Chalk;
+	args: Result<any>;
 	commands = new Commands();
 
 	async log(text: string, showTitle = false, title = false): Promise<void> {
-		const str = `${showTitle ? this.accent(`[${this.name}${title ? ` ${text}` : ''}] `) : ''}${!title ? chalk.white(this.formatInline(text)) : `v${this.version}\n`}`;
+		const str = `${showTitle ? this.accent(`[${this.name}${title ? ` ${text}` : ''}] `) : ''}${
+			!title ? chalk.white(this.formatInline(text)) : `v${this.version}\n`
+		}`;
 		console.log(str);
 	}
 
@@ -40,10 +41,7 @@ export class Nuru {
 	}
 
 	substr(str: string, start: string, end: string): string {
-		return str.substring(
-			str.indexOf(start) + 1,
-			str.lastIndexOf(end)
-		);
+		return str.substring(str.indexOf(start) + 1, str.lastIndexOf(end));
 	}
 
 	async handleRes(): Promise<void> {
@@ -52,7 +50,9 @@ export class Nuru {
 			cmdname = 'help';
 		}
 		const extraArgs = this.args._.slice(1, this.args._.length);
-		const definedArgs = Object.keys(this.args).filter(k => k !== '_').map(k => `${k} ${this.args[k]}`);
+		const definedArgs = Object.keys(this.args)
+			.filter((k) => k !== '_')
+			.map((k) => `${k} ${this.args[k]}`);
 
 		const args = [ ...definedArgs, ...extraArgs ];
 		if (this.commands.has(cmdname)) {
@@ -67,7 +67,7 @@ export class Nuru {
 			if (typeof res !== 'undefined') {
 				return this.log(res);
 			}
-			return void (0);
+			return void 0;
 		}
 		return this.error(`Command \`${cmdname}\` not found!`);
 	}
@@ -119,4 +119,4 @@ export class Nuru {
 		return this.handleRes();
 	}
 }
-export { Command, BaseStore, chalk };
+export { Command, chalk };

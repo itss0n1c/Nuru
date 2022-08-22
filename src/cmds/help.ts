@@ -5,6 +5,6 @@ const help = new Command({
 	description: 'Show the help info'
 });
 
-help.run((client) => client.commands.array().flatMap(c => `${c.name} - ${c.description}`).join('\n'));
+help.run((client) => [ ...client.commands.values() ].flatMap((c) => `${c.name} - ${c.description}`).join('\n'));
 
 export default help;

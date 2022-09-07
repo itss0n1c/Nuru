@@ -1,7 +1,7 @@
 import arg, { Result } from 'arg';
 import chalk from 'chalk';
 import help from './cmds/help';
-import { Command, Commands } from './Command';
+import { Command } from './Command';
 
 export interface NuruOptions {
 	name: string;
@@ -17,7 +17,7 @@ export class Nuru {
 	version: string;
 	accent: chalk.Chalk;
 	args: Result<any>;
-	commands = new Commands();
+	commands: Command[] = [];
 
 	async log(text: string, showTitle = false, title = false): Promise<void> {
 		const str = `${showTitle ? this.accent(`[${this.name}${title ? ` ${text}` : ''}] `) : ''}${
@@ -44,6 +44,14 @@ export class Nuru {
 		return str.substring(str.indexOf(start) + 1, str.lastIndexOf(end));
 	}
 
+	findCommand(name: string): Command {
+		const find = this.commands.find((c) => c.name === name);
+		if (find) {
+			return find;
+		}
+		return null;
+	}
+
 	async handleRes(): Promise<void> {
 		let cmdname = this.args._[0];
 		if (typeof cmdname === 'undefined') {
@@ -55,8 +63,8 @@ export class Nuru {
 			.map((k) => `${k} ${this.args[k]}`);
 
 		const args = [ ...definedArgs, ...extraArgs ];
-		if (this.commands.has(cmdname)) {
-			const cmd = this.commands.get(cmdname);
+		const cmd = this.findCommand(cmdname);
+		if (cmd) {
 			let res: string | void;
 			try {
 				res = await cmd.handle(this, args);
@@ -87,11 +95,11 @@ export class Nuru {
 		const defaultCommands = [ help ];
 		if (typeof opts.commands !== 'undefined') {
 			for (const cmd of opts.commands) {
-				this.commands.set(cmd.name, cmd);
+				this.commands.push(cmd);
 			}
 		}
 		for (const cmd of defaultCommands) {
-			this.commands.set(cmd.name, cmd);
+			this.commands.push(cmd);
 		}
 
 		if (typeof opts.args === 'undefined') {

@@ -28,5 +28,3 @@ export class Command<T = Nuru> {
 		return this.response(client, args);
 	}
 }
-
-export class Commands<T = Nuru> extends Map<string, Command<T>> {}

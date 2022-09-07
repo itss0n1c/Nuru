@@ -1,10 +1,6 @@
-import { Command } from '..';
+import { Command } from '../Command';
 
-const help = new Command({
+export default new Command({
 	name: 'help',
 	description: 'Show the help info'
-});
-
-help.run((client) => [ ...client.commands.values() ].flatMap((c) => `${c.name} - ${c.description}`).join('\n'));
-
-export default help;
+}).run((client) => client.commands.flatMap((c) => `${c.name} - ${c.description}`).join('\n'));

@@ -1,4 +1,4 @@
-import { Nuru } from '.';
+import { Nuru } from './index.js';
 
 // eslint-disable-next-line no-unused-vars
 type CBFunction<T = Nuru> = (client: T, args: string[]) => string | Promise<string> | void | Promise<void>;

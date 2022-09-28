@@ -1,24 +1,26 @@
 {
 	"name": "nuru",
-	"version": "1.1.3",
+	"version": "2.0.0",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"license": "MIT",
+	"type": "module",
 	"scripts": {
 		"build": "tsc -p .",
-		"dev": "ts-node-dev ./tests/index.ts"
+		"dev": "vite-node ./tests/index.ts --"
 	},
 	"devDependencies": {
-		"@types/node": "^18.7.9",
-		"@typescript-eslint/eslint-plugin": "^5.33.1",
-		"@typescript-eslint/parser": "^5.33.1",
-		"eslint": "^8.22.0",
-		"ts-node-dev": "^2.0.0",
-		"typescript": "^4.7.4"
+		"@types/node": "^18.7.23",
+		"@typescript-eslint/eslint-plugin": "^5.38.1",
+		"@typescript-eslint/parser": "^5.38.1",
+		"eslint": "^8.24.0",
+		"nodemon": "^2.0.20",
+		"typescript": "^4.8.4",
+		"vite-node": "^0.23.4"
 	},
 	"dependencies": {
 		"arg": "^5.0.2",
-		"chalk": "^4.1.2"
+		"chalk": "^5.0.1"
 	},
 	"repository": "git@github.com:itss0n1c/nuru.git",
 	"author": "S0n1c <itss0n1cdev@gmail.com>",

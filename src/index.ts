@@ -1,7 +1,7 @@
 import arg, { Result } from 'arg';
-import chalk from 'chalk';
-import help from './cmds/help';
-import { Command } from './Command';
+import chalk, { ChalkInstance } from 'chalk';
+import help from './cmds/help.js';
+import { Command } from './Command.js';
 
 export interface NuruOptions {
 	name: string;
@@ -15,7 +15,7 @@ export interface NuruOptions {
 export class Nuru {
 	name: string;
 	version: string;
-	accent: chalk.Chalk;
+	accent: ChalkInstance;
 	args: Result<any>;
 	commands: Command[] = [];
 
@@ -37,7 +37,7 @@ export class Nuru {
 			text = text.message;
 		}
 		const str = `${chalk.bgRgb(255, 0, 0)(chalk.rgb(255, 255, 255)('Error'))} ${chalk.white(this.formatInline(text))}`;
-		console.log(str);
+		console.error(str);
 	}
 
 	substr(str: string, start: string, end: string): string {

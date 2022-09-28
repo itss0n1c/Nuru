@@ -1,4 +1,4 @@
-import { Command, Nuru } from '../src';
+import { Command, Nuru } from '../src/index.js';
 
 const testDefaultCommand = new Command({
 	name: 'test',

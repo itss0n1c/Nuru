@@ -1,5 +1,5 @@
 import arg, { ArgError, Result } from 'arg';
-import chalk, { ChalkInstance } from 'chalk';
+import chalk from 'chalk';
 import help from './cmds/help.js';
 import { Command } from './Command.js';
 
@@ -15,7 +15,7 @@ export interface NuruOptions {
 export class Nuru {
 	name: string;
 	version: string;
-	accent: ChalkInstance;
+	accent: chalk.Chalk;
 	args: Result<any>;
 	commands: Command[] = [];
 

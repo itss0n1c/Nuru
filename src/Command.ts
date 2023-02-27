@@ -11,8 +11,7 @@ interface CmdInfo {
 export class Command<T = Nuru> {
 	name: string;
 	description: string;
-	client: T;
-	response: CBFunction<T>;
+	response?: CBFunction<T>;
 
 	constructor(data: CmdInfo) {
 		this.name = data.name;
@@ -25,6 +24,9 @@ export class Command<T = Nuru> {
 	}
 
 	async handle(client: T, args: string[]): Promise<string | void> {
+		if (!this.response) {
+			throw new Error('No response function provided');
+		}
 		return this.response(client, args);
 	}
 }

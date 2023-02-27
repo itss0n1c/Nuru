@@ -3,13 +3,15 @@
 		"declaration": true,
 		"forceConsistentCasingInFileNames": true,
 		"lib": ["ESNext"],
-		"module": "NodeNext",
-		"moduleResolution": "NodeNext",
+		"module": "CommonJS",
+		"moduleResolution": "node",
 		"outDir": "dist/",
 		"resolveJsonModule": true,
 		"rootDir": "src/",
 		"target": "ES2022",
-		"esModuleInterop": true
+		"esModuleInterop": true,
+		"strict": true,
+		"skipLibCheck": true
 	},
 	"include": ["src/*"]
 }

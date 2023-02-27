@@ -5,11 +5,10 @@ const testDefaultCommand = new Command({
 	description: 'a default test command'
 }).run((inst, args) => args.join(' '));
 
-new Nuru().init({
+new Nuru({
 	commands: [ testDefaultCommand ],
-	defaultCommand: 'test',
 	args: {
 		'-o': String,
 		'-d': String
 	}
-});
+}).handleRes();
